@@ -1,0 +1,23 @@
+extends layout
+
+block content
+    .container
+        .row
+            .col-md-10
+                table.table.table-bordered.table-hover.table-responsive
+                    thead
+                        tr
+                            th 分类名
+                            th 文章数
+                            th 创建时间
+                            th 删除
+                    tbody
+                        each item in categories
+                            tr(class="item-id-#{item._id}")
+                                td #{item.name}
+                                td #{item.articles.length}
+                                td #{moment(item.meta.updateAt).format('MM/DD/YYYY')}
+                                td: button.btn.btn-danger(type="button",data-id="#{item._id}") 删除
+
+
+

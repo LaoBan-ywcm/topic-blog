@@ -1,0 +1,10 @@
+extends layout
+
+block content
+    .container
+        .row
+            form(method="POST",action="/admin/addCategory")
+                .form-group
+                    label(for="categoryName") 文章分类
+                    input#categoryName.form-control(type="text",name="name")
+                button.btn.btn-default(type="submit") 提交
