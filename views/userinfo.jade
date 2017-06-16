@@ -1,0 +1,23 @@
+extends layout
+
+block content
+    .container
+        .row
+            form(method="POST",action="/user/update/userinfo")
+                .form-group
+                    label(for="") 昵称
+                    p #{user.name}
+                .form-group
+                    label(for="") 邮箱
+                    p #{user.email}
+                .form-group
+                    label(for="") 密码
+                    a.btn#updatepassword 修改
+                    p *****
+
+            if message
+                span.alert-danger #{message}
+
+
+
+    script(src="/javascripts/updatepassword.js")

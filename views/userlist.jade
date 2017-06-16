@@ -1,0 +1,25 @@
+extends layout
+
+block content
+    .container
+        .row
+            .col-md-10
+                table.table.table-bordered.table-hover.table-responsive
+                    thead
+                        tr
+                            th 用户名
+                            th 密码
+                            th 邮箱
+                            th 时间
+                            th 删除
+                    tbody
+                        each item in users
+                            tr(class="item-id-#{item._id}")
+                                td #{item.name}
+                                td #{item.password}
+                                td #{item.email}
+                                td #{moment(item.meta.updateAt).format('MM/DD/YYYY')}
+                                td: button.btn.btn-danger(type="button",data-id="#{item._id}") 删除
+
+
+
