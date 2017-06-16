@@ -1,5 +1,15 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  .container
+    .row
+      .col-md-5.col-md-offset-2
+        if articles.length > 0
+          each item in articles
+            span 来自：#{item.category.name}
+            br
+            span 作者：#{item.author.name}
+            p 标题：#{item.title}
+            p 简介： #{item.introduction}
+            a.btn.btn-default(target="_blank",href="/article/#{item._id}") 阅读全文
+            hr

@@ -2,6 +2,7 @@
  * Created by hp-pc on 2017/6/15 0015.
  */
 var mongoose = require('mongoose');
+var ObjectId = mongoose.Schema.Types.ObjectId;
 
 var UserSchema = new mongoose.Schema({
     name:{
@@ -9,6 +10,10 @@ var UserSchema = new mongoose.Schema({
         type:String
     },
     password:String,
+    articles:[{
+        type:ObjectId,
+        ref:'Article'
+    }],
     email:String,
     meta:{
         createAt:{

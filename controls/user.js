@@ -100,6 +100,7 @@ exports.userInfo = function(req,res){
 
 //更改密码
 exports.updateUserInfo = function(req,res){
+    console.log('***************')
     var userObj = res.locals.user = req.session.user;
     var _user = req.body.user;
     User.findOne({name:userObj.name},function(err,user){

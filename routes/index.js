@@ -39,4 +39,17 @@ router.post('/admin/addCategory',Category.save);
 //分类列表
 router.get('/admin/categoryList',Category.categoryList);
 
+//增加文章
+router.get('/user/addArticle',Article.new);
+router.post('/user/addArticle',Article.save);
+
+//文章列表
+router.get('/user/articleList',Article.articleList);
+
+//文章详情
+router.get('/article/:id',Article.detail);
+
+
+
+
 module.exports = router;
