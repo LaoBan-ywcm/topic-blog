@@ -49,6 +49,9 @@ router.get('/user/articleList',Article.articleList);
 //文章详情
 router.get('/article/:id',Article.detail);
 
+//删除文章
+router.delete('/user/delete/article',Article.delete);
+
 
 
 

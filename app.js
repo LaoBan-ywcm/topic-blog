@@ -60,6 +60,14 @@ app.use(function (err, req, res, next) {
 });
 
 app.locals.moment = moment;
+app.locals.removeByValue = Array.prototype.removeByValue = function(val){
+    for(var i=0;i<this.length;i++){
+        if(this[i] == val){
+            this.splice(i,1);
+            break;
+        }
+    }
+};
 
 app.listen(2222);
 

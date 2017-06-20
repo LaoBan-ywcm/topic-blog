@@ -3,20 +3,38 @@ extends layout
 block content
     .container
         .row
-            form(method="POST",action="/user/update/userinfo")
-                .form-group
-                    label(for="") 昵称
-                    p #{user.name}
-                .form-group
-                    label(for="") 邮箱
-                    p #{user.email}
-                .form-group
-                    label(for="") 密码
-                    a.btn#updatepassword 修改
-                    p *****
+            .col-md-8
+                h2 文章
+                table.table.table-bordered.table-hover.table-responsive
+                    thead
+                        tr
+                            th 文章名
+                            th 分类
+                            th 创建时间
+                            th 删除
+                    tbody
+                        each item in articles
+                            tr(class="item-id-#{item._id}")
+                                td #{item.title}
+                                td #{item.category.name}
+                                td #{moment(item.meta.updateAt).format('MM/DD/YYYY')}
+                                td: button.btn.btn-danger.del(type="button",data-id="#{item._id}") 删除
+            .col-md-3.col-md-offset-1
+                if message
+                    span.alert-danger #{message}
+                form(method="POST",action="/user/update/userinfo")
+                    .form-group
+                        label(for="") 昵称
+                        p #{user.name}
+                    .form-group
+                        label(for="") 邮箱
+                        p #{user.email}
+                    .form-group
+                        label(for="") 密码
+                        a.btn#updatepassword 修改
+                        p *****
 
-            if message
-                span.alert-danger #{message}
+
 
 
 

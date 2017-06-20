@@ -60,28 +60,74 @@ exports.save = function (req, res) {
 };
 
 //用户列表
-exports.articleList = function(req,res){
+exports.articleList = function (req, res) {
     res.locals.user = req.session.user;
     Article.find({})
         .populate('author category')
-        .exec(function(err,articles){
-            res.render('articlelist',{
-                articles:articles
+        .exec(function (err, articles) {
+            res.render('articlelist', {
+                articles: articles
             })
         })
 };
 
-//用户详情
-exports.detail = function(req,res){
-  var id = req.params.id;
+//文章详情
+exports.detail = function (req, res) {
+    res.locals.user = req.session.user;
+    var id = req.params.id;
 
 
-    Article.findOne({_id:id})
+    Article.findOne({_id: id})
         .populate('author category')
-        .exec(function(err,article){
+        .exec(function (err, article) {
             console.log(article)
-            res.render('articleDetail',{
-                article:article
+            res.render('articleDetail', {
+                article: article
             })
         })
+};
+
+exports.delete = function (req, res) {
+    var articleId = req.query.id;
+    if (articleId) {
+        Article.findOne({_id: articleId}, function (err, article) {
+
+            // 从该用户的articles中删除该文章
+            User.findOne({_id: article.author}, function (err, user) {
+                if (err) {
+                    console.log(err)
+                }
+
+                user.articles.removeByValue(articleId);
+                user.save(function (err, user) {
+                    console.log(user);
+                });
+
+                //从分类中删除该文章
+                Category.findOne({_id: article.category}, function (err, category) {
+                    if (err) {
+                        console.log(err)
+                    }
+
+                    category.articles.removeByValue(articleId);
+                    category.save(function (err, category) {
+                        console.log(category);
+                    });
+
+
+                    //    从article集合中删除该文章
+                    Article.remove({_id: articleId}, function (err, article) {
+                        if (err) {
+                            console.log(err);
+                            res.json({success: 0});
+                        } else {
+                            res.json({success: 1});
+                        }
+                    });
+                });
+
+            });
+
+        });
+    }
 };

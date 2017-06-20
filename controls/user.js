@@ -86,21 +86,32 @@ exports.userList = function(req,res){
 exports.userInfo = function(req,res){
     res.locals.user = req.session.user;
     var _user = res.locals.user;
-    User.findOne({name:_user.name},function (err,user) {
-        if(err){
-            console.log(err);
-        }
+    User.findOne({name:_user.name})
+        .populate({
+            path:'articles',
+            select:'',
+            model:'Article',
+            populate:{
+                path:'category',
+                select:'name',
+                model:'Category'
+            }
+        })
+        .exec(function(err,user){
+            if(err){
+                console.log(err)
+            }
 
-        res.render('userinfo',{
-            user:user,
-            title:'个人资料'
-        });
-    })
+            res.render('userinfo',{
+                title:'个人详情',
+                user:user,
+                articles:user.articles
+            })
+        })
 };
 
 //更改密码
 exports.updateUserInfo = function(req,res){
-    console.log('***************')
     var userObj = res.locals.user = req.session.user;
     var _user = req.body.user;
     User.findOne({name:userObj.name},function(err,user){
@@ -114,10 +125,16 @@ exports.updateUserInfo = function(req,res){
                 if(err){
                     console.log(err);
                 }
-                res.render('userinfo',{message:'修改成功'});
+                res.render('userinfo',{
+                    title:'个人资料',
+                    message:'修改成功'
+                });
             })
         }else{
-            res.render('userinfo',{message:'旧密码输入错误'});
+            res.render('userinfo',{
+                title:'个人资料',
+                message:'旧密码输入错误'
+            });
             return console.log('旧密码输入错误');
         }
     })
