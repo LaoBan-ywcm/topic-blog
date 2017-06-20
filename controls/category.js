@@ -36,17 +36,11 @@ exports.categoryList = function (req, res) {
 };
 
 
-function allcategories() {
-    Category.find({}, function (err, categories) {
-        if (err) {
-            console.log(err);
-        }
-        return categories;
-    });
-}
-
 exports.index = function (req, res) {
     res.locals.user = req.session.user;
+    var currentPage = req.query.p || 1;
+    var count = 2;
+
 
     //显示分类
     Category.find({}, function (err, categories) {
@@ -59,15 +53,26 @@ exports.index = function (req, res) {
         Article.find({})
             .populate('author category')
             .exec(function (err, articles) {
+                console.log(articles.length);
+
+
+
+
                 res.render('index', {
-                    articles: articles,
+                    //限制显示的文章数
+                    articles: articles.slice((currentPage-1)*count,(currentPage-1)*count+2),
                     categories: categories,
+                    totalPage:Math.floor(articles.length/count),
+                    currentPage:currentPage,
                     title: '首页'
                 })
             })
 
-
     });
+
+
+
+
 
 
 };

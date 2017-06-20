@@ -13,3 +13,21 @@ block content
             p 简介： #{item.introduction}
             a.btn.btn-default(target="_blank",href="/article/#{item._id}") 阅读全文
             hr
+        nav
+          ul.pagination
+            li
+              a(href="#")
+                span &laquo;
+            - for(var i=0;i<=totalPage;i++){
+                  - if(currentPage == i+1){
+                      li.active
+                        a(href="#") #{i + 1}
+                  - }else{
+                      li
+                        a(href="/?p=#{i + 1}") #{i + 1}
+                  - }
+            - }
+            li
+              a(href="#")
+                span &raquo;
+

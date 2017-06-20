@@ -11,7 +11,7 @@
                 if categories
                     each item in categories
                         li
-                            a(href="#") #{item.name}
+                            a(href="/category/?cId=#{item._id}") #{item.name}
             p.navbar-text.navbar-right
                 if user
                     a.navbar-link(href="/user/userinfo") #{user.name}
