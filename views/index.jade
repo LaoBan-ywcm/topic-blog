@@ -18,13 +18,13 @@ block content
             li
               a(href="#")
                 span &laquo;
-            - for(var i=0;i<=totalPage;i++){
-                  - if(currentPage == i+1){
+            - for(var i=1;i<=totalPage;i++){
+                  - if(currentPage == i){
                       li.active
-                        a(href="#") #{i + 1}
+                        a(href="#") #{i}
                   - }else{
                       li
-                        a(href="/?p=#{i + 1}") #{i + 1}
+                        a(href="/?p=#{i}") #{i}
                   - }
             - }
             li

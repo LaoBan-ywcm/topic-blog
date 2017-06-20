@@ -52,6 +52,9 @@ router.get('/article/:id',Article.detail);
 //删除文章
 router.delete('/user/delete/article',Article.delete);
 
+//文章分类显示
+router.get('/category',Category.detail);
+
 
 
 

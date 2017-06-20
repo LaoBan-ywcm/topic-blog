@@ -53,17 +53,15 @@ exports.index = function (req, res) {
         Article.find({})
             .populate('author category')
             .exec(function (err, articles) {
-                console.log(articles.length);
-
-
+                console.log(Math.ceil(articles.length / count));
 
 
                 res.render('index', {
                     //限制显示的文章数
-                    articles: articles.slice((currentPage-1)*count,(currentPage-1)*count+2),
+                    articles: articles.slice((currentPage - 1) * count, (currentPage - 1) * count + 2),
                     categories: categories,
-                    totalPage:Math.floor(articles.length/count),
-                    currentPage:currentPage,
+                    totalPage: Math.ceil(articles.length / count),
+                    currentPage: currentPage,
                     title: '首页'
                 })
             })
@@ -71,8 +69,49 @@ exports.index = function (req, res) {
     });
 
 
+};
 
 
+//文章分类显示
+exports.detail = function (req, res) {
+    var cId = req.query.cId;
+    res.locals.user = req.session.user;
+    var currentPage = req.query.p || 1;
+    var count = 2;
+
+    //头部导航
+    Category.find({}).exec(function (err, categories) {
+
+
+        //分类的文章
+        Article.find({category: cId})
+            .populate('author category')
+            .exec(function (err, articles) {
+                if (err) {
+                    console.log(err)
+                }
+
+
+
+                if(articles.length > 0){
+                    res.render('categoryDetail', {
+                        articles: articles.slice((currentPage - 1) * count, (currentPage - 1) * count + 2),
+                        title: articles[0].category.name,
+                        cId:cId,
+                        totalPage: Math.ceil(articles.length / count),
+                        currentPage: currentPage,
+                        categories: categories
+                    })
+                }else{
+                    res.render('categoryDetail',{
+                        title:'该分类下没有文章',
+                        categories: categories
+                    })
+                }
+
+
+            })
+    });
 
 
 };
