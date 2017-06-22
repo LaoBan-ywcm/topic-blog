@@ -4,6 +4,7 @@
 var Article = require('../modules/article');
 var Category = require('../modules/category');
 var User = require('../modules/user');
+var Comment = require('../modules/comment');
 
 exports.new = function (req, res) {
     res.locals.user = req.session.user;
@@ -78,11 +79,19 @@ exports.detail = function (req, res) {
 
 
     Article.findOne({_id: id})
-        .populate('author category')
+        .populate({
+            path:'author category comment',
+            select:'',
+            populate:{
+                path:'from reply.from reply.to',
+                select:''
+            }
+        })
         .exec(function (err, article) {
-            console.log(article)
+            console.log(article);
             res.render('articleDetail', {
-                article: article
+                article: article,
+                comments:article.comment
             })
         })
 };

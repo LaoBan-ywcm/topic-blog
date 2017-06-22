@@ -53,7 +53,7 @@ exports.index = function (req, res) {
         Article.find({})
             .populate('author category')
             .exec(function (err, articles) {
-                console.log(Math.ceil(articles.length / count));
+
 
 
                 res.render('index', {

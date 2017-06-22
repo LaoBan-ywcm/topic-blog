@@ -3,6 +3,7 @@ var router = express.Router();
 var User = require('../controls/user');
 var Article = require('../controls/article');
 var Category = require('../controls/category');
+var Comment = require('../controls/comment');
 
 
 /* GET home page. */
@@ -54,6 +55,9 @@ router.delete('/user/delete/article',Article.delete);
 
 //文章分类显示
 router.get('/category',Category.detail);
+
+//评论文章
+router.post('/user/comment',Comment.new);
 
 
 

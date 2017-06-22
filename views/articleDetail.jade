@@ -10,3 +10,49 @@ block content
                     span #{moment(article.meta.updateAt).format('MM-DD HH:mm:ss')}
                     p.lead #{article.introduction}
                     p #{article.content}
+
+            .col-md-6.col-md-offset-3
+                form
+                    h3 评论
+                    if user
+                        input(type="hidden",name="comment[from]",value="#{user._id}")
+                    input#aId(type="hidden",name="comment[article]",value="#{article._id}")
+                    textarea.form-control#con(rows=4,name="comment[content]")
+                    a#commsubmit.btn.btn-primary.pull-right 提交
+
+
+            .col-md-6.col-md-offset-3.comment
+                h3 评论区
+                if comments
+                    each comment in comments
+                        hr
+                        .media.main-media
+                            input.cId(type="hidden",value="#{comment._id}")
+                            input.from(type="hidden",value="#{comment.from._id}")
+                            .media-left
+                                a(href="#")
+                                    img.media-object(src="http://iph.href.lu/50x60")
+                            .media-body
+                                h4 #{comment.from.name}
+                                p #{comment.content}
+                                    a.reply(data-cId="#{comment._id}") 回复
+                                    if comment.reply
+                                        each item in comment.reply
+                                            hr
+                                            .media
+                                                .media-left
+                                                    a(href="#")
+                                                        img.media-object(src="http://iph.href.lu/50x60")
+                                                .media-body
+                                                    h4 #{item.from.name}:@#{item.to.name}
+                                                    p #{item.content}
+                                                        a.reply(data-fId="#{item.from._id}",data-cId="#{comment._id}") 回复
+
+
+                else
+                    p 还没有评论
+
+
+
+
+    script(src="/javascripts/comment.js")
