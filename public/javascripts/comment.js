@@ -60,7 +60,7 @@ $(function(){
 
 
 
-        // var $parent = $targetTo.parent('#addreply').siblings('.media-body:last');
+
         var $parent = $targetTo.closest('.main-media').find('.media-body').first();
 
 

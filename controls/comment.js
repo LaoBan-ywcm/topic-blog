@@ -9,8 +9,6 @@ var Comment = require('../modules/comment');
 exports.new = function (req, res) {
     res.locals.user = req.session.user;
     var _comment = req.body;
-    console.log('**************')
-    console.log(_comment)
     if(_comment.cId){
     //    评论某个人的评论
         Comment.findOne({_id:_comment.cId},function(err,comment){
@@ -57,7 +55,6 @@ exports.new = function (req, res) {
                 console.log(err);
             }
 
-            console.log(comment);
 
             //将评论添加到文章的comment中
             Article.findOne({_id:comment.article},function (err,article) {

@@ -120,7 +120,7 @@ exports.delete = function (req, res) {
 
                 user.articles.removeByValue(articleId);
                 user.save(function (err, user) {
-                    console.log(user);
+
                 });
 
                 //从分类中删除该文章
@@ -131,7 +131,9 @@ exports.delete = function (req, res) {
 
                     category.articles.removeByValue(articleId);
                     category.save(function (err, category) {
-                        console.log(category);
+                        if(err){
+                            console.log(err)
+                        }
                     });
 
 

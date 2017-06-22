@@ -13,20 +13,6 @@ var transposter = nodemailer.createTransport({
     }
 });
 
-// options = {
-//     from:'2459007415@qq.com',
-//     to:'2459007415@qq.com',
-//     subject:'博客验证码',
-//     text:'Hello 邱齐'
-//
-// };
-
-// transposter.sendMail(options,function(err,info){
-//     if(err){
-//         return console.log(err);
-//     }
-//     console.log('Message sent: ' + info.response);
-// });
 
 module.exports = transposter;
 
