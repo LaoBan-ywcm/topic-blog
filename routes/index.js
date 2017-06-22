@@ -9,11 +9,18 @@ var Comment = require('../controls/comment');
 /* GET home page. */
 router.get('/', Category.index);
 
-//用户登录
+//用户登录处理
 router.post('/users/signin', User.signin);
 
-//用户注册
+//用户注册处理
 router.post('/users/signup', User.signup);
+
+//用户登录页面
+// router.get('/user/signin',User.ssignin);
+
+//用户注册页面
+// router.get('/user/signup',User.ssignup);
+
 
 //用户登出
 router.get('/user/logout',User.logout);
@@ -41,7 +48,7 @@ router.post('/admin/addCategory',Category.save);
 router.get('/admin/categoryList',Category.categoryList);
 
 //增加文章
-router.get('/user/addArticle',Article.new);
+router.get('/user/addArticle',User.signinRequired,Article.new);
 router.post('/user/addArticle',Article.save);
 
 //文章列表

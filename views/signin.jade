@@ -1,0 +1,15 @@
+extends layout
+
+block content
+    .container
+        .row
+            .col-md-4.col-md-offset-4
+                form(method="POST",action="/users/signin")
+                    .form-group
+                        label(for="signinName") 用户名
+                        input#signinName.form-control(name="user[name]",type=text)
+                    .form-group
+                        label(for="signinPassword") 密码
+                        input#signinPassword.form-control(name="user[password]",type="password")
+                    a.pull-left(href="/user/passwordretireval") 忘记密码?
+                    button.pull-right.btn.btn-default(type="submit") 登录

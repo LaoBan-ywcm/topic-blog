@@ -8,10 +8,21 @@
             a.navbar-brand(href="/") 博客
         nav.collapse.navbar-collapse
             ul.nav.navbar-nav
-                if categories
-                    each item in categories
-                        li
-                            a(href="/category/?cId=#{item._id}") #{item.name}
+                //管理员
+                if (user && user.role > 10)
+                    li
+                        a(href="/admin/userList") 用户管理
+                    li
+                        a(href="/admin/addCategory") 增加分类
+                    li
+                        a(href="/admin/categoryList") 分类列表
+                else
+                    if categories
+                        each item in categories
+                            li
+                                a(href="/category/?cId=#{item._id}") #{item.name}
+                    li
+                        a(href="/user/addArticle") 写文章
             p.navbar-text.navbar-right
                 if user
                     a.navbar-link(href="/user/userinfo") #{user.name}
@@ -37,7 +48,7 @@
                         input#signupEmail.form-control(name="user[email]",type="email")
                     .form-group
                         label(for="signupPassword") 密码
-                        input#signupPassword.form-control(name="user[password]",type="text")
+                        input#signupPassword.form-control(name="user[password]",type="password")
                 .modal-footer
                     button.btn.btn-default(type="submit") 提交
                     button.btn.btn-default(type="button",data-dismiss="modal") 关闭
@@ -55,7 +66,7 @@
                         input#signinName.form-control(name="user[name]",type=text)
                     .form-group
                         label(for="signinPassword") 密码
-                        input#signinPassword.form-control(name="user[password]",type="text")
+                        input#signinPassword.form-control(name="user[password]",type="password")
                 .modal-footer
                     a.pull-left(href="/user/passwordretireval") 忘记密码?
                     button.btn.btn-default(type="submit") 登录

@@ -7,6 +7,7 @@ var User = require('../modules/user');
 
 //增加分类页
 exports.new = function (req, res) {
+    res.locals.user = req.session.user;
     res.render('addCategory', {
         title: '增加文章分类'
     });

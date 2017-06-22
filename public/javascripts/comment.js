@@ -39,7 +39,6 @@ $(function(){
         if(!cId){
             cId = $target.closest('.main-media').find('.cId').val();
             from = $target.data('fid') || $target.closest('.main-media').find('.from').val();;
-            alert(from)
         }
 
 

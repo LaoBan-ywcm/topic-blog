@@ -78,24 +78,35 @@ exports.detail = function (req, res) {
     var id = req.params.id;
 
 
-    Article.findOne({_id: id})
-        .populate({
-            path:'author category comment',
-            select:'',
-            populate:{
-                path:'from reply.from reply.to',
-                select:''
-            }
-        })
-        .exec(function (err, article) {
-            console.log(article);
-            res.render('articleDetail', {
-                article: article,
-                comments:article.comment
+    Category.find({},function(err,categories){
+        if(err){
+            console.log(err)
+        }
+
+        Article.findOne({_id: id})
+            .populate({
+                path:'author category comment',
+                select:'',
+                populate:{
+                    path:'from reply.from reply.to',
+                    select:''
+                }
             })
-        })
+            .exec(function (err, article) {
+                res.render('articleDetail', {
+                    article: article,
+                    comments:article.comment,
+                    categories:categories,
+                    title:article.title
+                })
+            })
+    });
+
+
+
 };
 
+//删除文章
 exports.delete = function (req, res) {
     var articleId = req.query.id;
     if (articleId) {
