@@ -3,7 +3,7 @@ extends  layout
 block content
     .container
         .row
-            form(method="POST",action="/user/addArticle")
+            form(method="POST",action="/user/addArticle",enctype="multipart/form-data")
                 input(type="hidden",name="article[author]",value="#{user._id}")
                 .form-group
                     label(for="articleTitle") 标题
@@ -15,6 +15,9 @@ block content
                             label.radio-inline
                                 input(type="radio",name="article[category]",value="#{item._id}")
                                 | #{item.name}
+                .form-group
+                    label(for="articlePicture") 图片
+                    input#articlePicture(type="file",name="picture")
                 .form-group
                     label(for="articleIntroduction") 简介
                     textarea#articleIntroduction.form-control(type="text",rows="3",name="article[introduction]")

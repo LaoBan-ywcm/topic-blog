@@ -1,0 +1,46 @@
+body{
+    background-color: #f4f5f5;
+    font-family: -apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif;
+}
+
+/*导航条背景颜色*/
+.head{
+    background-color: #0593d3;
+}
+
+/*导航标题颜色*/
+.head .navbar-header a{
+    color:#ffffff;
+}
+/*导航条链接颜色*/
+.head .navbar-nav li a{
+    color:#ffffff;
+}
+.head .navbar-nav li a:hover{
+    background-color: #2e6da4;
+}
+/*用户登录登出颜色*/
+.head .navbar-collapse p a{
+    margin:0 6px;
+    color:#ffffff;
+}
+/*图标颜色*/
+.fa{
+    color: #ffffff;
+    padding:3px;
+
+}
+.font-position{
+    position: relative;
+}
+
+.form-group input{
+    padding-left:20px;
+}
+/*登录/注册中的图标*/
+.form-group i{
+    position: absolute;
+    top:30px;
+    color:grey;
+    margin:3px;
+}

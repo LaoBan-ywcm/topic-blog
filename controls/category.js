@@ -36,11 +36,12 @@ exports.categoryList = function (req, res) {
     });
 };
 
-
+//首页
 exports.index = function (req, res) {
     res.locals.user = req.session.user;
     var currentPage = req.query.p || 1;
-    var count = 2;
+    //每页显示的数量
+    var count = 3;
 
 
     //显示分类
@@ -59,7 +60,7 @@ exports.index = function (req, res) {
 
                 res.render('index', {
                     //限制显示的文章数
-                    articles: articles.slice((currentPage - 1) * count, (currentPage - 1) * count + 2),
+                    articles: articles.slice((currentPage - 1) * count, (currentPage - 1) * count + count),
                     categories: categories,
                     totalPage: Math.ceil(articles.length / count),
                     currentPage: currentPage,

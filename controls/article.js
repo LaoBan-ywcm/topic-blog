@@ -5,6 +5,8 @@ var Article = require('../modules/article');
 var Category = require('../modules/category');
 var User = require('../modules/user');
 var Comment = require('../modules/comment');
+var path = require('path');
+var fs = require('fs');
 
 exports.new = function (req, res) {
     res.locals.user = req.session.user;
@@ -22,10 +24,46 @@ exports.new = function (req, res) {
     });
 };
 
+//保存图片
+exports.pictureSave = function(req,res,next){
+
+    var picture = req.files.picture;
+    var filePath = picture.path;
+    var fileType = picture.type.split('/')[1];
+    var fileName = picture.originalFilename;
+
+    if(fileName){
+        fs.readFile(filePath,function(err,data){
+            var time = Date.now();
+            var newPicture = time + '.' + fileType;
+            var newPath = path.join(__dirname,'../','/public/images/' + newPicture);
+
+            fs.writeFile(newPath,data,function(err){
+                if(err){
+                    console.log(err);
+                }
+                req.picture = newPicture;
+                next();
+            })
+        })
+    }else{
+        next();
+    }
+};
+
 //保存文章
 exports.save = function (req, res) {
     var _article = req.body.article;
+    console.log('****');
+    console.log(req.picture);
+
+
+    if(req.picture){
+        _article.picture = req.picture;
+    }
+
     var articleObj = new Article(_article);
+
 
     articleObj.save(function (err, article) {
         // 保存文章

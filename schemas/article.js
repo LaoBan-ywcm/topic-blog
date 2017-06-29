@@ -15,6 +15,7 @@ var ArticleSchema = new mongoose.Schema({
         type: ObjectId,
         ref: 'User'
     },
+    picture:String,
     category: {
         type: ObjectId,
         ref: 'Category'

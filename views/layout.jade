@@ -1,11 +1,14 @@
 doctype html
 html
   head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-    link(rel='stylesheet', href='/stylesheets/bootstrap.css')
-    script(src="/javascripts/jquery.min.js")
-    script(src="/javascripts/bootstrap.min.js")
+    block head
+      title= title
+      link(href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet")
+      link(rel='stylesheet', href='/stylesheets/style.css')
+      link(rel='stylesheet', href='/stylesheets/bootstrap.css')
+      link(rel='stylesheet', href='/stylesheets/head.css')
+      script(src="/javascripts/jquery.min.js")
+      script(src="/javascripts/bootstrap.min.js")
   body
     include ./heads/head
     block content

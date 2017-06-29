@@ -1,0 +1,122 @@
+/*距离导航栏顶部距离*/
+.recommend {
+    margin-top: 20px;
+}
+.clear-padding{
+    padding-right:0px;
+}
+
+/*文章*/
+.main-content-list {
+    margin: 10px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 3px;
+}
+
+.headPortrait span {
+    margin: 5px;
+}
+
+.headPortrait img {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    border-radius: 20px;
+}
+
+.main-content-list p {
+    font-size: 13px;
+    display: inline-block;
+    margin:15px 0px 0px 3px;
+}
+
+.main-content-list p span.category {
+    display: inline-block;
+    padding: 0px 6px;
+    color: #ea6f5a;
+    font-size: 10px;
+    width: auto;
+    height: 20px;
+    margin: 0 auto;
+    border: 1px solid #ea6f5a;
+    border-radius: 3px;
+    vertical-align: middle;
+    font-weight: 400;
+}
+
+.main-content-list span.time {
+    color: #969696;
+}
+
+.main-content-list h4.article-title a {
+    color: #0593d3;
+    font-weight: 700;
+}
+
+.main-content-list p.introduction {
+    line-height: 24px;
+}
+.main-content-list .picture{
+    display: block;
+    overflow: hidden;
+    width: 150px;
+    height:130px;
+    margin-top:25px;
+}
+.main-content-list .picture  img{
+    width: 100%;
+    height:100%;
+    vertical-align: middle;
+    border-radius: 4px;
+}
+
+
+/*分页*/
+.recommend .paging {
+    width: 100%;
+    display: table;
+    text-align: center;
+}
+
+.recommend ul .pagination {
+    display: inline-block;
+}
+
+/*右侧边*/
+.main-comment  {
+    margin: 0px 0px;
+    height: 100%;
+
+
+    border-radius: 3px;
+}
+section {
+    margin:10px 0px;
+    padding: 20px;
+    background-color: #ffffff;
+}
+.main-comment .pag ul{
+    padding:0px;
+}
+.main-comment .pag ul li{
+    text-align: center;
+    font-size: 10px;
+    list-style-type: none;
+    display: inline-block;
+    box-sizing: border-box;
+    height:100%;
+    line-height: 22px;
+    margin:5px;
+    padding:5px;
+    background-color: #f4f5f5;
+    border-radius: 15px;
+    color:#454645;
+}
+.main-comment .pag ul .fa{
+    color:#37c700;
+}
+.main-comment .pag ul a{
+    color:#454645;
+}
+

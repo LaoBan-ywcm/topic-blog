@@ -4,6 +4,8 @@ var User = require('../controls/user');
 var Article = require('../controls/article');
 var Category = require('../controls/category');
 var Comment = require('../controls/comment');
+var multipart = require('connect-multiparty');
+var multipartMiddleware = multipart();
 
 
 /* GET home page. */
@@ -13,7 +15,7 @@ router.get('/', Category.index);
 router.post('/users/signin', User.signin);
 
 //用户注册处理
-router.post('/users/signup', User.signup);
+router.post('/users/signup',User.headPosterSave, User.signup);
 
 //用户登录页面
 // router.get('/user/signin',User.ssignin);
@@ -49,7 +51,7 @@ router.get('/admin/categoryList',Category.categoryList);
 
 //增加文章
 router.get('/user/addArticle',User.signinRequired,Article.new);
-router.post('/user/addArticle',Article.save);
+router.post('/user/addArticle',Article.pictureSave,Article.save);
 
 //文章列表
 router.get('/user/articleList',Article.articleList);

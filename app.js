@@ -9,7 +9,7 @@ var session = require('express-session');
 var moment = require('moment');
 var mongoStore = require('connect-mongo')(session);
 var dburl = 'mongodb://localhost/log'
-
+mongoose.Promise = require('bluebird');
 mongoose.connect(dburl);
 
 var index = require('./routes/index');
@@ -37,6 +37,7 @@ app.use(session({
     resave: false,
     saveUninitialized: true
 }));
+app.use(require('connect-multiparty')());
 
 app.use('/', index);
 app.use('/users', users);

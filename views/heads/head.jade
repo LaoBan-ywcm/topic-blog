@@ -1,9 +1,6 @@
-.container
-    .row
-        .page-header
-            h1 #{title}
-.navbar.navbar-default.navbar-fixed-top
-    .container
+
+.navbar.navbar-fixed-top.head
+    .container.main-nav
         .navbar-header
             a.navbar-brand(href="/") 博客
         nav.collapse.navbar-collapse
@@ -25,30 +22,45 @@
                         a(href="/user/addArticle") 写文章
             p.navbar-text.navbar-right
                 if user
-                    a.navbar-link(href="/user/userinfo") #{user.name}
-                    span &nbsp;| &nbsp;
-                    a.navbar-link(href="/user/logout") 登出
+                    a.navbar-link(href="/user/userinfo")
+                        i.fa.fa-user
+                        |#{user.name}
+                    a.navbar-link(href="/user/logout")
+                        i.fa.fa-sign-out
+                        |登出
                 else
-                    a.navbar-link(href="#",data-toggle="modal",data-target="#signin") 登录
-                    span &nbsp;| &nbsp;
-                    a.navbar-link(href="#",data-toggle="modal",data-target="#signup") 注册
+                    a.navbar-link(href="#",data-toggle="modal",data-target="#signin")
+                        i.fa.fa-user
+                        |登录
+                    a.navbar-link(href="#",data-toggle="modal",data-target="#signup")
+                        i.fa.fa-sign-out
+                        |注册
 #signup.modal.fade
     .modal-dialog
         .modal-content
-            form(method="POST",action="/users/signup")
+            form(method="POST",action="/users/signup",enctype="multipart/form-data")
                 .modal-header 注册
                     button(type="button" class="close",data-dismiss="modal")
                         span &times;
                 .modal-body
                     .form-group
-                        label(for="signupName") 用户名
-                        input#signupName.form-control(name="user[name]",type="text")
+                        div.font-position
+                            label(for="signupName") 用户名
+                            input#signupName.form-control(name="user[name]",type="text")
+                            i.fa.fa-user
                     .form-group
-                        label(for="signupEmail") 邮箱
-                        input#signupEmail.form-control(name="user[email]",type="email")
+                        label(for="headPortrait") 上传头像
+                        input#headPortrait(type="file",name="headPortrait")
                     .form-group
-                        label(for="signupPassword") 密码
-                        input#signupPassword.form-control(name="user[password]",type="password")
+                        div.font-position
+                            label(for="signupEmail") 邮箱
+                            input#signupEmail.form-control(name="user[email]",type="email")
+                            i.fa.fa-envelope-o
+                    .form-group
+                        div.font-position
+                            label(for="signupPassword") 密码
+                            input#signupPassword.form-control(name="user[password]",type="password")
+                            i.fa.fa-key
                 .modal-footer
                     button.btn.btn-default(type="submit") 提交
                     button.btn.btn-default(type="button",data-dismiss="modal") 关闭
@@ -62,11 +74,15 @@
                         span &times;
                 .modal-body
                     .form-group
-                        label(for="signinName") 用户名
-                        input#signinName.form-control(name="user[name]",type=text)
+                        div.font-position
+                            label(for="signinName") 用户名
+                            input#signinName.form-control(name="user[name]",type=text)
+                            i.fa.fa-user
                     .form-group
-                        label(for="signinPassword") 密码
-                        input#signinPassword.form-control(name="user[password]",type="password")
+                        div.font-position
+                            label(for="signinPassword") 密码
+                            input#signinPassword.form-control(name="user[password]",type="password")
+                            i.fa.fa-key
                 .modal-footer
                     a.pull-left(href="/user/passwordretireval") 忘记密码?
                     button.btn.btn-default(type="submit") 登录
