@@ -7,7 +7,7 @@ block append head
 block content
   .container.recommend
     .row
-      .col-md-8.clear-padding
+      .col-md-8.clear-padding.offset
         if articles.length > 0
           each item in articles
             div.main-content-list
@@ -92,7 +92,20 @@ block content
             li
               a(href="#")
                 i.fa.fa-plus
-                | .net
+                | .Net
 
-        section
+        section.author
           header 优秀作者
+          hr
+          if users
+            each user in users
+              div.excellentAuthor
+                a
+                  div.user-image
+                    img(src="/images/user/#{user.headPortrait}")
+                  div.user-info
+                    div.username #{user.name}
+                    div.userarticle #{user.articles.length} 篇文章
+                  button.follow
+                    i.fa.fa-plus &nbsp; 关注
+              .clearfix

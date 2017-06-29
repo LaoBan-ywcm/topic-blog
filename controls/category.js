@@ -44,6 +44,8 @@ exports.index = function (req, res) {
     var count = 3;
 
 
+
+
     //显示分类
     Category.find({}, function (err, categories) {
         if (err) {
@@ -56,16 +58,23 @@ exports.index = function (req, res) {
             .populate('author category')
             .exec(function (err, articles) {
 
+                User.find({role:0},function(err,users){
+                    if(err){
+                        console.log(err)
+                    }
 
 
-                res.render('index', {
-                    //限制显示的文章数
-                    articles: articles.slice((currentPage - 1) * count, (currentPage - 1) * count + count),
-                    categories: categories,
-                    totalPage: Math.ceil(articles.length / count),
-                    currentPage: currentPage,
-                    title: '首页'
-                })
+                    res.render('index', {
+                        //限制显示的文章数
+                        articles: articles.slice((currentPage - 1) * count, (currentPage - 1) * count + count),
+                        categories: categories,
+                        totalPage: Math.ceil(articles.length / count),
+                        currentPage: currentPage,
+                        users:users
+                    })
+
+                });
+
             })
 
     });
