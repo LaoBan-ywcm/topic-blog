@@ -47,9 +47,10 @@ block content
                                             i.fa.fa-comment-o.fa-lg
                                             span 评论
                                             span #{moment(comment.meta.updateAt).format('YYYY.DD.MM HH:mm')}
-                                        hr
+                                            hr
                                     else
                                         a.reply(data-cId="#{comment._id}")
+                                        hr
 
                                     if comment.reply
                                         each item in comment.reply
