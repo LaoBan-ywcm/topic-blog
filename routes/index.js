@@ -18,10 +18,10 @@ router.post('/users/signin', User.signin);
 router.post('/users/signup',User.headPosterSave, User.signup);
 
 //用户登录页面
-// router.get('/user/signin',User.ssignin);
+router.get('/user/signin',User.ssignin);
 
 //用户注册页面
-// router.get('/user/signup',User.ssignup);
+router.get('/user/signup',User.ssignup);
 
 
 //用户登出

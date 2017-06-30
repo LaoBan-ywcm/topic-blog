@@ -237,3 +237,10 @@ exports.ssignup = function (req, res) {
         title: '注册'
     });
 };
+
+exports.ssignin = function (req, res) {
+    res.locals.user = req.session.user;
+    res.render('signin', {
+        title: '登录'
+    });
+};

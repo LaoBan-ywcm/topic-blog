@@ -45,25 +45,24 @@
                 .modal-body
                     .form-group
                         div.font-position
-                            label(for="signupName") 用户名
-                            input#signupName.form-control(name="user[name]",type="text")
+                            input#signupName.form-control(name="user[name]",type="text",placeholder='用户名')
                             i.fa.fa-user
                     .form-group
-                        label(for="headPortrait") 上传头像
-                        input#headPortrait(type="file",name="headPortrait")
-                    .form-group
                         div.font-position
-                            label(for="signupEmail") 邮箱
-                            input#signupEmail.form-control(name="user[email]",type="email")
+                            input#signupEmail.form-control(name="user[email]",type="email",placeholder="邮箱")
                             i.fa.fa-envelope-o
                     .form-group
                         div.font-position
-                            label(for="signupPassword") 密码
-                            input#signupPassword.form-control(name="user[password]",type="password")
+                            input#signupPassword.form-control(name="user[password]",type="password",placeholder="密码")
                             i.fa.fa-key
+                    .from-group
+                        span.sl-custom-file
+                            input.btn-file(type="button" value="上传头像")
+                            input.ui-input-file(type="file",name="headPortrait")
+                    button.btn.btn-default.signupButton(type="submit") 注册
+
                 .modal-footer
-                    button.btn.btn-default(type="submit") 提交
-                    button.btn.btn-default(type="button",data-dismiss="modal") 关闭
+
 
 #signin.modal.fade
     .modal-dialog
@@ -75,16 +74,16 @@
                 .modal-body
                     .form-group
                         div.font-position
-                            label(for="signinName") 用户名
-                            input#signinName.form-control(name="user[name]",type=text)
+                            input#signinName.form-control(name="user[name]",type=text,placeholder="用户名")
                             i.fa.fa-user
                     .form-group
                         div.font-position
-                            label(for="signinPassword") 密码
-                            input#signinPassword.form-control(name="user[password]",type="password")
+                            input#signinPassword.form-control(name="user[password]",type="password",placeholder="密码")
                             i.fa.fa-key
+                    button.btn.btn-default.signinButton(type="submit") 登录
                 .modal-footer
-                    a.pull-left(href="/user/passwordretireval") 忘记密码?
-                    button.btn.btn-default(type="submit") 登录
-                    button.btn.btn-default(type="button",data-dismiss="modal") 关闭
+                    span.pull-left.signupTitle 没有账号？
+                    a.pull-left.signupSpan(href="/user/signup") 注册
+                    a.pull-right(href="/user/passwordretireval") 忘记密码?
+
 

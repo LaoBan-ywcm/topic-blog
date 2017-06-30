@@ -37,10 +37,72 @@ body{
 .form-group input{
     padding-left:20px;
 }
+
+
 /*登录/注册中的图标*/
 .form-group i{
     position: absolute;
-    top:30px;
+    top:5px;
     color:grey;
     margin:3px;
+}
+
+
+
+/*登录/注册弹出框*/
+.modal-dialog{
+    width:25%;
+}
+.modal-header{
+    font-weight: 600;
+    font-size: 16px;
+}
+.modal-body,.modal-footer{
+    padding:15px 25px;
+}
+.modal-content{
+    padding-top:10px;
+    padding-bottom:10px;
+}
+.modal-dialog .form-group input{
+    padding-left: 25px;
+}
+/*上传文件*/
+.sl-custom-file {
+    position: relative;
+    display: inline-block;
+    zoom: 1;
+    cursor: pointer;
+    overflow: hidden;
+    vertical-align: middle;
+    margin-bottom: 10px;
+}
+.btn-file{
+    background-color: #4c4c4c;
+    color: #fff;
+    border: 1px solid #4c4c4c;
+    width: 100%;
+    border-radius: 0;
+}
+.sl-custom-file .ui-input-file {
+    position: absolute;
+    right: 0;
+    top: 0;
+    _zoom: 30;
+    font-size: 300px;
+    height: 100%;
+    _height: auto;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    -ms-filter: "alpha(opacity=0)";
+    cursor: pointer;
+}
+.signinButton,.signupButton,.signinButton:hover,.signupButton:hover{
+    color:#ffffff;
+    width:100%;
+    background-color: #007fff;
+}
+
+.signupTitle{
+    color:#8b9196;
 }
