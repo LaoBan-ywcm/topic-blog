@@ -1,9 +1,12 @@
 extends layout
 
+block append head
+    link(rel='stylesheet', href='/stylesheets/article-detail.css')
+
 block content
     .container
         .row
-            .col-md-6.col-md-offset-3
+            .col-md-6.col-md-offset-3.main-content
                 if article
                     span #{article.author.name}
                     br
@@ -11,50 +14,60 @@ block content
                     p.lead #{article.introduction}
                     p #{article.content}
 
-            .col-md-6.col-md-offset-3
+            .col-md-6.col-md-offset-3.to-comment
                 form
-                    h3 评论
-                    if user
-                        input(type="hidden",name="comment[from]",value="#{user._id}")
-                        input#aId(type="hidden",name="comment[article]",value="#{article._id}")
-                        textarea.form-control#con(rows=4,name="comment[content]")
-                        a#commsubmit.btn.btn-primary.pull-right 提交
-                    else
-                        h3 需要登录才可以评论！
+                    h4 评论
+                    .comment-form
+                        if user
+                            input(type="hidden",name="comment[from]",value="#{user._id}")
+                            input#aId(type="hidden",name="comment[article]",value="#{article._id}")
+                            textarea.form-control#con(rows=2,name="comment[content]",placeholder="说说你的看法")
+                            a#commsubmit.send.btn.pull-right 发送
+                            a.cancel.btn.pull-right 取消
+
+                            .clearfix
+                        else
+                            h3 需要登录才可以评论！
 
 
-            .col-md-6.col-md-offset-3.comment
-                h3 评论区
+            .col-md-6.col-md-offset-3.comment.comment-list
                 if (comments.length > 0)
                     each comment in comments
-                        hr
                         .media.main-media
                             input.cId(type="hidden",value="#{comment._id}")
                             input.from(type="hidden",value="#{comment.from._id}")
                             .media-left
                                 a(href="#")
-                                    img.media-object(src="http://iph.href.lu/50x60")
+                                    img.headPortrait.media-object(src="/images/user/#{comment.from.headPortrait}")
                             .media-body
                                 h4 #{comment.from.name}
                                 p #{comment.content}
                                     if user
-                                        a.reply(data-cId="#{comment._id}") 回复
+                                        a.reply(data-cId="#{comment._id}")
+                                            i.fa.fa-comment-o.fa-lg
+                                            span 评论
+                                            span #{moment(comment.meta.updateAt).format('YYYY.DD.MM HH:mm')}
+                                        hr
                                     else
                                         a.reply(data-cId="#{comment._id}")
+
                                     if comment.reply
                                         each item in comment.reply
-                                            hr
                                             .media
                                                 .media-left
                                                     a(href="#")
-                                                        img.media-object(src="http://iph.href.lu/50x60")
+                                                        img.headPortrait.media-object(src="/images/user/#{item.from.headPortrait}")
                                                 .media-body
                                                     h4 #{item.from.name}:@#{item.to.name}
                                                     p #{item.content}
                                                         if user
-                                                            a.reply(data-fId="#{item.from._id}",data-cId="#{comment._id}") 回复
+                                                            a.reply(data-fId="#{item.from._id}",data-cId="#{comment._id}")
+                                                                i.fa.fa-comment-o.fa-lg
+                                                                span 评论
+                                                                span #{moment(item.from.meta.updateAt).format('YYYY.DD.MM HH:mm')}
                                                         else
                                                             a.reply(data-fId="#{item.from._id}",data-cId="#{comment._id}")
+                                            hr
 
 
 
@@ -62,4 +75,5 @@ block content
 
 
 
+    script(src="/javascripts/moment.js")
     script(src="/javascripts/comment.js")

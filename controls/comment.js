@@ -35,7 +35,6 @@ exports.new = function (req, res) {
                         var responseData = {};
                         responseData.success = 1;
                         responseData.data = comment.reply[comment.reply.length-1];
-                        console.log('123')
                         res.json(responseData);
                     })
 
