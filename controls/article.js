@@ -72,6 +72,7 @@ exports.save = function (req, res) {
         }
 
 
+
         // 文章保存完后，将该文章添加到分类中
         Category.findOne({_id: article.category}, function (err, category) {
             category.articles.push(article._id);
@@ -81,14 +82,17 @@ exports.save = function (req, res) {
                 }
 
 
+
                 //   文章添加到分类后，将文章添加到作者名下
 
                 User.findOne({_id: article.author}, function (err, user) {
+                    console.log(user);
                     user.articles.push(article._id);
-                    user.save(function (err, category) {
+                    user.save(function (err, user) {
                         if (err) {
                             console.log(err);
                         }
+
 
                         res.redirect('/');
                     })

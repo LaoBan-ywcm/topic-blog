@@ -17,7 +17,7 @@ block content
                     a
                       img.media-object(src="/images/user/#{item.author.headPortrait}")
                     span.author #{item.author.name}
-                    span.time #{moment(item.meta.updateAt).format('MM/DD/YYYY')}
+                    span.time #{moment(item.meta.updateAt).format('MM/DD/YYYY HH:mm')}
                   h4.article-title
                     a(target="_blank",href="/article/#{item._id}") #{item.title}
                   div.wid.introduction #{item.introduction}

@@ -1,38 +1,56 @@
 extends layout
 
+block append head
+    link(rel='stylesheet', href='/stylesheets/user.css')
+
 block content
     .container
         .row
-            .col-md-8
-                h2 文章
-                table.table.table-bordered.table-hover.table-responsive
-                    thead
-                        tr
-                            th 文章名
-                            th 分类
-                            th 创建时间
-                            th 删除
-                    tbody
-                        each item in articles
-                            tr(class="item-id-#{item._id}")
-                                td #{item.title}
-                                td #{item.category.name}
-                                td #{moment(item.meta.updateAt).format('MM/DD/YYYY')}
-                                td: button.btn.btn-danger.del(type="button",data-id="#{item._id}") 删除
-            .col-md-3.col-md-offset-1
-                if message
-                    span.alert-danger #{message}
-                form(method="POST",action="/user/update/userinfo")
-                    .form-group
-                        label(for="") 昵称
+            .col-md-10.col-md-offset-1
+                section.article-head
+                    .user-headPortrait
+                        img(src="/images/user/#{user.headPortrait}")
+                    .user-nickname
                         p #{user.name}
-                    .form-group
-                        label(for="") 邮箱
-                        p #{user.email}
-                    .form-group
-                        label(for="") 密码
-                        a.btn#updatepassword 修改
-                        p *****
+                    button 设置
+                main.user-content
+                    .col-md-8
+                        section.article-list
+                            p 共有#{user.articles.length}篇文章
+                            hr
+                            each item in articles
+                                .content-box
+                                    .info-box
+                                        .user-name
+                                            span #{user.name}
+                                            span #{moment(item.meta.updateAt).format('YYYY-MM-DD HH:mm')}
+                                        .article-title
+                                            a #{item.title}
+                                        .article-comment
+                                            span
+                                                i.fa.fa-comment-o.fa-lg
+                                                |#{item.comment.length}条评论
+                                    .thumb
+                                        img(src="/images/#{item.picture}")
+                                    .clearfix
+                                    hr
+
+                    .col-md-4
+                        section.user-detailInfo
+                            if message
+                                span.alert-danger #{message}
+                            form(method="POST",action="/user/update/userinfo")
+                                .form-group
+                                    label(for="") 昵称
+                                    p #{user.name}
+                                .form-group
+                                    label(for="") 邮箱
+                                    p #{user.email}
+                                .form-group
+                                    label(for="") 密码
+                                    a.btn#updatepassword 修改
+                                    p *****
+                    .clearfix
 
 
 
