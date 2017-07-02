@@ -6,26 +6,27 @@ block append head
 block content
     .container
         .row
-            .add-article
-                form(method="POST",action="/user/addArticle",enctype="multipart/form-data")
-                    input(type="hidden",name="article[author]",value="#{user._id}")
-                    .form-group
-                        label(for="articleTitle") 标题
-                        input#articleTitle.form-control(type="text",name="article[title]")
-                    .form-group
-                        label 分类
-                        div
-                            each item in categories
-                                label.radio-inline
-                                    input(type="radio",name="article[category]",value="#{item._id}")
-                                    | #{item.name}
-                    .form-group
-                        label(for="articlePicture") 图片
-                        input#articlePicture(type="file",name="picture")
-                    .form-group
-                        label(for="articleIntroduction") 简介
-                        textarea#articleIntroduction.form-control(type="text",rows="3",name="article[introduction]")
-                    .form-group
-                        label(for="articleContent") 内容
-                        textarea#articleContent.form-control(type="text",rows="5",name="article[content]")
-                    button.btn.btn-default(type="submit") 保存
+            .col-md-8.col-md-offset-2
+                .add-article
+                    form(method="POST",action="/user/addArticle",enctype="multipart/form-data")
+                        input(type="hidden",name="article[author]",value="#{user._id}")
+                        .form-group
+                            label(for="articleTitle") 标题
+                            input#articleTitle.form-control(type="text",name="article[title]")
+                        .form-group
+                            label 分类
+                            div
+                                each item in categories
+                                    label.radio-inline
+                                        input(type="radio",name="article[category]",value="#{item._id}")
+                                        | #{item.name}
+                        .form-group
+                            label(for="articlePicture") 图片
+                            input#articlePicture(type="file",name="picture")
+                        .form-group
+                            label(for="articleIntroduction") 简介
+                            textarea#articleIntroduction.form-control(type="text",rows="3",name="article[introduction]")
+                        .form-group
+                            label(for="articleContent") 内容
+                            textarea#articleContent.form-control(type="text",rows="80",name="article[content]",placeholder="最多输入80行")
+                        button.btn.btn-default(type="submit") 保存

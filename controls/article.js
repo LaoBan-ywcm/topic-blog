@@ -136,6 +136,7 @@ exports.detail = function (req, res) {
                 }
             })
             .exec(function (err, article) {
+                console.log(article.content)
                 res.render('articleDetail', {
                     article: article,
                     comments:article.comment,

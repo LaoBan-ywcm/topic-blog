@@ -3,18 +3,32 @@ extends layout
 block append head
     link(rel='stylesheet', href='/stylesheets/article-detail.css')
 
+
+
 block content
     .container
         .row
-            .col-md-6.col-md-offset-3.main-content
+            .col-md-8.col-md-offset-2.main-content
                 if article
-                    span #{article.author.name}
-                    br
-                    span #{moment(article.meta.updateAt).format('MM-DD HH:mm:ss')}
-                    p.lead #{article.introduction}
-                    p #{article.content}
+                    .article-author
+                        .article-headPortrait
+                            img.media-object(src="/images/user/#{article.author.headPortrait}")
+                        .article-authorInfo
+                            span.author #{article.author.name}
+                            br
+                            span.time #{moment(article.meta.updateAt).format('YYYY 年 MM 月 DD 日 HH:mm')}
+                    .article-title
+                        h1 #{article.title}
+                    hr
 
-            .col-md-6.col-md-offset-3.to-comment
+                    .article-introduction
+                        p
+                            span 导读：
+                            #{article.introduction}
+                    .article-content
+                       textarea(rows=80,cols=8) #{(article.content)}
+
+            .col-md-8.col-md-offset-2.to-comment
                 form
                     h4 评论
                     .comment-form
@@ -30,7 +44,7 @@ block content
                             h3 需要登录才可以评论！
 
 
-            .col-md-6.col-md-offset-3.comment.comment-list
+            .col-md-8.col-md-offset-2.comment.comment-list
                 if (comments.length > 0)
                     each comment in comments
                         .media.main-media
@@ -75,6 +89,7 @@ block content
 
 
 
-
+    script(src="/javascripts/subsection.js")
     script(src="/javascripts/moment.js")
     script(src="/javascripts/comment.js")
+
