@@ -19,7 +19,7 @@ block content
                             p 共有#{user.articles.length}篇文章
                             hr
                             each item in articles
-                                .content-box
+                                .content-box(class="item-id-#{item._id}")
                                     .info-box
                                         .user-name
                                             span #{user.name}
@@ -30,6 +30,7 @@ block content
                                             span
                                                 i.fa.fa-comment-o.fa-lg
                                                 |#{item.comment.length}条评论
+                                                button.btn.del(data-id="#{item._id}")  删除
                                     .thumb
                                         img(src="/images/#{item.picture}")
                                     .clearfix

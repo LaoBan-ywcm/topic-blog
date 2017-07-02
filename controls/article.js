@@ -75,6 +75,7 @@ exports.save = function (req, res) {
 
         // 文章保存完后，将该文章添加到分类中
         Category.findOne({_id: article.category}, function (err, category) {
+            console.log(category)
             category.articles.push(article._id);
             category.save(function (err, category) {
                 if (err) {

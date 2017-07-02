@@ -41,7 +41,7 @@ exports.index = function (req, res) {
     res.locals.user = req.session.user;
     var currentPage = req.query.p || 1;
     //每页显示的数量
-    var count = 3;
+    var count = 4;
 
 
 
@@ -55,25 +55,28 @@ exports.index = function (req, res) {
 
         //    显示文章
         Article.find({})
+            .sort({'meta.updateAt':-1})
             .populate('author category')
             .exec(function (err, articles) {
 
-                User.find({role:0},function(err,users){
-                    if(err){
-                        console.log(err)
-                    }
+                User.find({role:0})
+                    .sort({'meta.updateAt':-1})
+                    .exec(function(err,users){
+                        if(err){
+                            console.log(err)
+                        }
 
 
-                    res.render('index', {
-                        //限制显示的文章数
-                        articles: articles.slice((currentPage - 1) * count, (currentPage - 1) * count + count),
-                        categories: categories,
-                        totalPage: Math.ceil(articles.length / count),
-                        currentPage: currentPage,
-                        users:users
+                        res.render('index', {
+                            //限制显示的文章数
+                            articles: articles.slice((currentPage - 1) * count, (currentPage - 1) * count + count),
+                            categories: categories,
+                            totalPage: Math.ceil(articles.length / count),
+                            currentPage: currentPage,
+                            users:users
+                        })
+
                     })
-
-                });
 
             })
 
@@ -88,7 +91,7 @@ exports.detail = function (req, res) {
     var cId = req.query.cId;
     res.locals.user = req.session.user;
     var currentPage = req.query.p || 1;
-    var count = 2;
+    var count = 4;
 
     //头部导航
     Category.find({}).exec(function (err, categories) {
@@ -96,6 +99,7 @@ exports.detail = function (req, res) {
 
         //分类的文章
         Article.find({category: cId})
+            .sort({'meta.updateAt':-1})
             .populate('author category')
             .exec(function (err, articles) {
                 if (err) {
@@ -106,7 +110,7 @@ exports.detail = function (req, res) {
 
                 if(articles.length > 0){
                     res.render('categoryDetail', {
-                        articles: articles.slice((currentPage - 1) * count, (currentPage - 1) * count + 2),
+                        articles: articles.slice((currentPage - 1) * count, (currentPage - 1) * count + count),
                         title: articles[0].category.name,
                         cId:cId,
                         totalPage: Math.ceil(articles.length / count),

@@ -169,7 +169,7 @@ section>hr{
     color:#969696;
 }
 .main-comment .author .excellentAuthor .follow{
-    margin-left:30px;
+    float:right;
     background-color: transparent;
     border:none;
 }

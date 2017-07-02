@@ -223,8 +223,8 @@ exports.sendEmail = function (req, res) {
 exports.signinRequired = function (req, res, next) {
     res.locals.user = req.session.user;
     if (!res.locals.user) {
-        return res.render('signin', {
-            title: '登录'
+        return res.render('info', {
+            message: '请先登录'
         });
     }
     next();

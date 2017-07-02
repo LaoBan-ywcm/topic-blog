@@ -72,13 +72,18 @@
 .content-box .info-box .article-title a{
     display: inline-block;
     color:#0593d3;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 700;
     margin:10px auto;
 }
 .content-box .info-box .article-comment span .fa{
     color:#ccc;
     margin-right:5px;
+}
+
+.content-box .info-box .article-comment span .del{
+    background-color: transparent;
+    color:#e36209;
 }
 
 .content-box .thumb{

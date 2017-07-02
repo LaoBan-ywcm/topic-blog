@@ -1,34 +1,47 @@
 extends layout
 
+block append head
+  link(rel='stylesheet', href='/stylesheets/category-detail.css')
+
 block content
     .container
         .row
-            .col-md-5.col-md-offset-2
+            .col-md-8.col-md-offset-2
                 if articles && articles.length > 0
                     each item in articles
-                        span 来自：#{item.category.name}
-                        br
-                        span 作者：#{item.author.name}
-                        p 标题：#{item.title}
-                        p 简介： #{item.introduction}
-                        a.btn.btn-default(target="_blank",href="/article/#{item._id}") 阅读全文
-                        hr
-                nav
-                    ul.pagination
-                        - if(totalPage){
-                        li
-                            a(href="#")
-                                span &laquo;
-                        - for(var i=1;i<=totalPage;i++){
-                        - if(currentPage == i){
-                        li.active
-                            a(href="#") #{i}
-                        - }else{
-                        li
-                            a(href="/category/?p=#{i}&cId=#{cId}") #{i}
-                        - }
-                        - }
-                        li
-                            a(href="#")
-                                span &raquo;
-                        - }
+                        div.main-content-list
+                                      .row
+                                        .col-md-9
+                                          div.headPortrait
+                                            a
+                                              img.media-object(src="/images/user/#{item.author.headPortrait}")
+                                            span.author #{item.author.name}
+                                            span.time #{moment(item.meta.updateAt).format('MM/DD/YYYY HH:mm')}
+                                          h4.article-title
+                                            a(target="_blank",href="/article/#{item._id}") #{item.title}
+                                          div.wid.introduction #{item.introduction}
+                                          p
+                                            span.category #{item.category.name}
+                                        .col-md-3
+                                          a.picture
+                                            img.img-responsive.center-block.media-object(src="/images/#{item.picture}")
+                .paging
+                    nav
+                        ul.pagination
+                            - if(totalPage){
+                            li
+                                a(href="#")
+                                    span &laquo;
+                            - for(var i=1;i<=totalPage;i++){
+                            - if(currentPage == i){
+                            li.active
+                                a(href="#") #{i}
+                            - }else{
+                            li
+                                a(href="/category/?p=#{i}&cId=#{cId}") #{i}
+                            - }
+                            - }
+                            li
+                                a(href="#")
+                                    span &raquo;
+                            - }
